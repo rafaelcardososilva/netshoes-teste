@@ -1,0 +1,141 @@
+.center{
+	left: 0; 
+	right: 0; 
+	margin-left: auto; 
+	margin-right: auto;
+}
+
+.item{
+	cursor: pointer;
+	text-align: center;
+	max-width: 320px;
+	margin: auto;
+	min-height: 446px;
+	padding: 15px 0px;
+	border: 1px solid transparent;
+
+	&:hover{
+	    border: 1px solid #ececec;
+	}
+
+	.imagem{
+		margin-bottom: 10px;
+	
+		img{
+			width: 100%;
+			max-width: 180px;
+		}
+	}
+
+	.nome{
+		margin-bottom: 10px;
+
+		&:after{
+			content: "";
+			width: 15px;
+			margin: 10px auto 0px auto;
+			display: block;
+			border-bottom: solid 2px #dfbd00;
+		}
+	}
+
+	.precos{
+
+		strong{
+			font-size: 24px;
+		}
+
+		.preco{
+		    line-height: 22px;
+		}
+
+		.preco-parcelado{
+			color: #999999;
+		}
+	}
+
+	.compra-container{
+
+		.btn{
+			width: 100px;
+			display: inline-block;
+
+			span{
+				color: white;
+				font-size: 18px;
+			}
+		}
+
+		.tamanho{
+			position: relative;
+
+			.alert{
+				width: 80%;
+				top: -65px;
+			    padding: 10px;
+				font-size: 12px; 
+				@extend .center;
+				position: absolute;
+				margin: 0px auto 10px auto;
+
+				&:before{
+					content: "";
+					width: 0;
+					bottom: -10px;
+					display: block;
+					@extend .center;
+					position: absolute;
+					border-style: solid;
+					border-width: 10px 10px 0px;
+					border-color: #ebccd1 transparent;
+				}
+
+				&:after{
+					content: "";
+					width: 0;
+					bottom: -9px;
+					display: block;
+					@extend .center;
+					position: absolute;
+					border-style: solid;
+					border-width: 10px 10px 0px;
+					border-color: #f2dede transparent;
+				}
+			}
+
+			ul{
+				margin: 5px 0px;
+
+				li{
+					list-style: none;
+					margin-right: 5px;
+					display: inline-block;
+
+					span{
+					    height: 26px;
+					    padding: 5px;
+					    color: #4d4d4d;
+						cursor: pointer;
+						font-size: 12px;
+					    line-height: 26px;
+					    width: 40px;
+					    height: 40px;
+					    border-radius: 20px;
+						display: inline-block;
+					    border: 1px solid #ccc;
+					    background-color: #f9f9f9;
+					}
+
+					span.selected, span:hover{
+				    	background-color: white;
+				    	border: 1px solid #02b3df;
+					}
+				}
+
+				li:last-child{
+					margin: 0px;
+				}
+			}
+		}
+	}
+}
