@@ -1,0 +1,24 @@
+// CORES
+$corDetasque: #dfbd00;
+$corTextoSub: #999999;
+$corBorda: #131316;
+
+// CLASSES
+.bag-produtos{
+  top: 28px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  font-size: 11px;
+  line-height: 20px;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  border-radius: 100%;
+  display: inline-block;
+  background: $corDetasque;
+}
+
+.padding{
+  padding: 0px 20px;
+}

@@ -1,6 +1,5 @@
 <template>
 	<div class="item"> 
-
 		<div class="item-container" @click="exibeCompra = !exibeCompra">
 			<div class="imagem">
 				<img :src='"../../assets/img/1/"+slug(item.title)+".jpg"'>
@@ -19,13 +18,13 @@
 		<div class="compra-container" v-if="exibeCompra">
 			<div class="tamanho" v-if="item.availableSizes.length">
 				<div class="alert alert-danger" v-if="exibeErro">Por favor, selecione o tamanho para continuar</div>
+				<div class="alert alert-success" v-if="exibeSucesso">Produto adicionado no carrinho com sucesso!</div>
 				<ul>
 					<li v-for="(tamanho, itemIndex) in item.availableSizes">
 						<span @click="selecionaTamanho(tamanho, itemIndex)" :class="{selected : tamanhoAtivado === itemIndex}">{{ tamanho }}</span>
 					</li>
 				</ul>
 			</div>
-
 			<a xhref="#" class="btn btn-info" @click="comprar">
 				<span class="glyphicon glyphicon-shopping-cart"></span>	
 			</a>
@@ -36,14 +35,15 @@
 <script>
 
 export default {
-	props: ["item", "itemsCarrinho"],
+	props: ["item"],
 
 	data(){
 		return{
-			exibeCompra: false,
-			exibeErro: false,
+			tamanho: "",
 			tamanhoAtivado: "",
-			tamanho: ""
+			exibeErro: false,
+			exibeCompra: false,
+			exibeSucesso: false,
 		}
 	},
 
@@ -59,6 +59,13 @@ export default {
 			}
 		},
 
+		computed:{
+
+			itemsCarrinho(){
+				return this.$store.state.itemsCarrinho;
+			}
+		},
+
 		selecionaTamanho(tamanho, itemIndex){
 			// remove o erro
 			this.exibeErro = false;
@@ -70,21 +77,55 @@ export default {
 
 		comprar(){
 
+			var scope = this;
+
 			// valida se tem tamanho
 			if(this.item.availableSizes.length > 0 && this.tamanho != ""){
 
 				// adiciona item no carrinho
-				this.itemsCarrinho.push(this.item);
-			}else{
-				// exibe erro
-				var scope = this;
+				this.adicionaItemCarrinho(this.item);
+
+				//exibe sucesso 				
+				this.exibeSucesso = true;
 				
+				setTimeout(function(){ 
+					scope.exibeSucesso = false;
+				}, 3000);				
+			}else{
+				// exibe erro				
 				this.exibeErro = true;
 				
 				setTimeout(function(){ 
 					scope.exibeErro = false;
 				}, 3000);
 			}
+		},
+
+		adicionaItemCarrinho(item){
+
+			var scope = this;
+
+			var produto = {
+				sku : item.sku,
+				title : item.title,
+				style : item.style,
+				size : item.availableSizes[this.tamanhoAtivado],
+				price : item.price,
+				qtd : 1
+			}
+
+			var novo = true;
+
+			// item repetido aumenta quantidade
+			this.$store.state.itemsCarrinho.map(function(e){
+				if( e.sku == item.sku && e.size == item.availableSizes[scope.tamanhoAtivado] ){
+					e.qtd++;
+					novo = false;
+				}
+			});
+
+			// adiciona produto no carrinho
+			novo ? this.$store.state.itemsCarrinho.push(produto) : '';
 		}
 	},
 }

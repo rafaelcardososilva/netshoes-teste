@@ -1,8 +1,11 @@
 # netshoes-teste
 
-> A Vue.js project
+> Teste Netshoes em Vue.js
 
 ## Build Setup
+
+# node
+Tenha o node instalado em sua máquina
 
 ``` bash
 # install dependencies

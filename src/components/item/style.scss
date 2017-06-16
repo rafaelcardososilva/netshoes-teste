@@ -87,7 +87,6 @@
 					position: absolute;
 					border-style: solid;
 					border-width: 10px 10px 0px;
-					border-color: #ebccd1 transparent;
 				}
 
 				&:after{
@@ -99,6 +98,26 @@
 					position: absolute;
 					border-style: solid;
 					border-width: 10px 10px 0px;
+				}
+			}
+
+			.alert-success{
+				&:before{
+					border-color: #d6e9c6 transparent;
+				}
+
+				&:after{
+					border-color: #dff0d8 transparent;
+				}				
+			}
+
+			.alert-danger {
+
+				&:before{
+					border-color: #ebccd1 transparent;
+				}
+
+				&:after{
 					border-color: #f2dede transparent;
 				}
 			}
